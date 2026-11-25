@@ -44,8 +44,10 @@ def main() -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(text)
     # The grader collects outputs as another user: leave the file readable.
+    # (Do NOT chmod OUTPUT_DIR itself: in the grading sandbox /output is
+    # writable but owned by another user, so chmod on it raises
+    # PermissionError and fails the run with exit 1.)
     os.chmod(path, 0o644)
-    os.chmod(OUTPUT_DIR, 0o755)
 
 
 if __name__ == "__main__":
